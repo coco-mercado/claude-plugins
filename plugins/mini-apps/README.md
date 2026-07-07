@@ -27,8 +27,6 @@ El server [`@cocowallet/miniapp-mcp`](https://www.npmjs.com/package/@cocowallet/
 | `restart_tunnel` | Reabre el túnel si se cayó |
 | `close_tunnel` | Cierra el túnel dejando el dev server corriendo |
 
-El MCP nunca escribe el código de tu app — editás los archivos en `localDir` y los cambios se ven en vivo, sin re-publicar.
-
 ## Skills incluidas
 
 | Skill | Qué hace |
