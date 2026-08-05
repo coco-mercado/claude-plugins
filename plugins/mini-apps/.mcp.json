@@ -5,7 +5,10 @@
       "args": [
         "-y",
         "@cocowallet/miniapp-mcp@latest"
-      ]
+      ],
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY:-}"
+      }
     }
   }
 }
