@@ -13,7 +13,7 @@ Dentro de Claude Code:
 
 Requisito: **Node ≥ 20**. Nada más — no hace falta ningún token por ahora, y el túnel de preview se maneja solo (si no tenés `cloudflared`, el MCP lo descarga automáticamente la primera vez).
 
-Solo para generar íconos con IA (`generate_mini_app_icon`) hace falta una `OPENAI_API_KEY` exportada en tu shell antes de abrir Claude Code — el plugin la pasa al MCP. El resto de las herramientas funciona sin ella.
+Ni siquiera para generar íconos con IA hace falta una API key: la generación corre en el gateway de Coco, no en tu máquina.
 
 ## MCP incluido
 
@@ -25,7 +25,7 @@ El server [`@cocowallet/miniapp-mcp`](https://www.npmjs.com/package/@cocowallet/
 | `list_mini_apps` | Lista tus mini apps con status, preview URL y carpeta local |
 | `publish_mini_app` | Publica una app al catálogo (túnel local o URL fija de prod) |
 | `republish_mini_app` | Actualiza la entrada del catálogo (nueva URL, título, ícono) |
-| `generate_mini_app_icon` | Genera el ícono/logo de la app con `gpt-image-2`, usando los íconos glass de la wallet como referencia de estilo, y lo publica en el catálogo. Necesita `OPENAI_API_KEY` |
+| `generate_mini_app_icon` | Genera el ícono/logo de la app con `gpt-image-2`, usando los íconos glass de la wallet como referencia de estilo, y lo publica en el catálogo. Sin API keys: corre server-side |
 | `stop_mini_app` | Para el dev server y el túnel |
 | `restart_tunnel` | Reabre el túnel si se cayó |
 | `close_tunnel` | Cierra el túnel dejando el dev server corriendo |
