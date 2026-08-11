@@ -1,110 +1,110 @@
 ---
 name: payments
-description: Usar SIEMPRE que una mini app de Coco cobre, pague o mueva dinero — sendTransaction, batches, cubrir el saldo corto del usuario con sus otras monedas (requiredFunds), cobrar en bolívares por Pago Móvil, registrar la operación en la wallet y manejar los errores. También cuando el usuario diga "que pueda cobrar", "los pagos fallan por saldo insuficiente", "que acepte otras monedas", "cobrar en bolívares", "agregar pagos a la mini app".
+description: Use ALWAYS when a Coco mini app charges, pays or moves money — sendTransaction, batches, covering the user's short balance with their other coins (requiredFunds), charging in bolívares via Pago Móvil, recording the operation in the wallet, and handling the errors. Also when the user says "let it charge", "payments fail with insufficient funds", "accept other coins", "charge in bolívares", "add payments to the mini app", or in Spanish "que pueda cobrar", "los pagos fallan por saldo insuficiente", "que acepte otras monedas", "cobrar en bolívares", "agregar pagos a la mini app".
 ---
 
-# Pagos en una mini app de Coco
+# Payments in a Coco mini app
 
-La mini app corre dentro de la wallet, así que el usuario **ya tiene cuenta y saldo**: no hay onboarding, ni seed phrases, ni pedirle gas. El gas lo cubre el paymaster de Coco.
+The mini app runs inside the wallet, so the user **already has an account and a balance**: no onboarding, no seed phrases, no asking them for gas. Coco's paymaster covers the gas.
 
-Todo pasa por `@cocowallet/miniapp-sdk`.
+Everything goes through `@cocowallet/miniapp-sdk`.
 
-## Cobrar
+## Charging
 
 ```ts
 const { hash } = await MiniApp.sendTransaction({
   to: USDC,
-  data: encodeTransfer(comercio, monto),
+  data: encodeTransfer(merchant, amount),
   chainId: CHAIN_IDS.BASE,
 });
 ```
 
-Varias transacciones que deben pasar juntas o no pasar → `sendTransactionBatch(txs, { chainId })`. Es un único UserOp: una firma, y o entran todas o ninguna.
+For several transactions that must land together or not at all → `sendTransactionBatch(txs, { chainId })`. It's a single UserOp: one signature, and either all of them land or none does.
 
-`chainId` acepta Polygon (137, default) y Base (8453). Va **a nivel del batch**, no por transacción.
+`chainId` accepts Polygon (137, the default) and Base (8453). It goes **on the batch**, not on each transaction.
 
-## El usuario no tiene saldo en tu token
+## The user has no balance in your token
 
-Es el caso más común y el que más ventas rompe: el usuario tiene plata, pero en otra moneda o en otra red. De los 16 tokens que la wallet le muestra, 14 viven fuera de Polygon.
+This is the most common case and the one that kills the most sales: the user has money, just in another coin or another chain. Of the 16 tokens the wallet shows them, 14 live outside Polygon.
 
-Declará lo que el pago necesita y la wallet cubre el faltante convirtiendo desde las otras monedas del usuario, en una sola confirmación y sin que salga de tu mini app:
+Declare what the payment needs and the wallet covers the gap by converting from the user's other coins, in a single confirmation and without them leaving your mini app:
 
 ```ts
 await MiniApp.sendTransaction({
   to: USDC,
-  data: encodeTransfer(comercio, monto),
+  data: encodeTransfer(merchant, amount),
   chainId: CHAIN_IDS.BASE,
   requiredFunds: { token: 'USDC', amount: '0.05' },
 });
 ```
 
-- `token` — el símbolo como lo muestra la wallet (`'USDC'`, `'USDT'`).
-- `amount` — unidades humanas, **string**. Es lo que el usuario necesita **tener**, no la suma de tus transacciones: si cobrás 0.05 y además hacés un `approve`, son 0.05.
-- En un batch va en las opciones del batch.
+- `token` — the symbol as the wallet shows it (`'USDC'`, `'USDT'`).
+- `amount` — human units, as a **string**. It's what the user needs to **hold**, not the sum of your transactions: if you charge 0.05 and also run an `approve`, it's 0.05.
+- In a batch it goes in the batch options.
 
-Declararlo es el opt-in y quitarlo lo apaga. La wallet **nunca adivina** el monto desde tu calldata.
+Declaring it is the opt-in and removing it is the off switch. The wallet **never guesses** the amount from your calldata.
 
-### ⚠️ No valides el saldo por tu cuenta para abortar
+### ⚠️ Don't pre-check the balance and bail out
 
-Este es el error que hace que la funcionalidad no se active nunca. Si tu mini app lee el balance y lanza un error **antes** de llamar a `sendTransaction`, la wallet no ve el pago y no puede ofrecer nada.
+This is the mistake that keeps the feature from ever kicking in. If your mini app reads the balance and throws **before** calling `sendTransaction`, the wallet never sees the payment and can't offer anything.
 
-Suele haber más de un corte y en archivos distintos — un preflight en la lógica de pago y un botón deshabilitado en la pantalla de monto. Hay que revisar los dos.
+There is usually more than one bail-out, in different files — a preflight in the payment logic and a disabled button on the amount screen. Both need to go.
 
-Podés mantener el aviso visual ("te faltan X"), pero **no debe bloquear**. Dejá pasar la transacción y manejá el error que devuelva la wallet.
+Keep the visual warning ("you're short X") if you want, but it **must not block**. Let the transaction through and handle whatever error the wallet returns.
 
-## Errores que hay que manejar
+## Errors to handle
 
-| Código | Qué significa | Qué mostrar |
+| Code | What it means | What to show |
 |---|---|---|
-| `INSUFFICIENT_FUNDS` | No alcanza ni convirtiendo | Ofrecer recargar |
-| `FUNDING_FAILED` | No se pudo convertir. **No se cobró nada** | Reintentar |
-| `FUNDING_PENDING` | La conversión va en camino a la wallet del usuario. La plata **está a salvo**, el pago no se completó | Pedirle que reintente en un momento |
-| `USER_REJECTED` | Canceló la confirmación | Volver sin ruido |
-| `TX_FAILED` | La transacción falló en la cadena | Reintentar |
+| `INSUFFICIENT_FUNDS` | Not enough even after converting | Offer to top up |
+| `FUNDING_FAILED` | The conversion failed. **Nothing was charged** | Retry |
+| `FUNDING_PENDING` | The conversion is on its way to the user's wallet. The money **is safe**, the payment didn't complete | Ask them to retry shortly |
+| `USER_REJECTED` | They cancelled the confirmation | Go back quietly |
+| `TX_FAILED` | The transaction failed on-chain | Retry |
 
-Llegan como `Error` con el mensaje en formato `CODIGO: texto`.
+They arrive as an `Error` whose message is `CODE: text`.
 
-## Saber qué soporta la wallet que te hospeda
+## Knowing what the hosting wallet supports
 
-Tu mini app se despliega sola, así que puede correr en una wallet anterior al campo que querés usar. `capabilities()` es **síncrono** a propósito:
+Your mini app ships on its own, so it can run on a wallet older than the field you want to use. `capabilities()` is **synchronous** on purpose:
 
 ```ts
 if (MiniApp.capabilities().includes('funding.autoSwap')) {
-  // mostrar "pagá con tus otras monedas"
+  // show "pay with your other coins"
 }
 ```
 
-Gateá con esto cualquier UI propia y podés publicar antes de que salga la wallet nueva: en las viejas mantenés tu comportamiento actual y se activa solo cuando llegue.
+Gate any UI of your own with this and you can ship before the new wallet is out: on older ones you keep your current behaviour, and it turns on by itself when the wallet arrives.
 
-## Cobrar en bolívares (Venezuela)
+## Charging in bolívares (Venezuela)
 
 ```ts
 const r = await MiniApp.requestPagoMovilPayout({
   amountUsd: 12.5,
   beneficiary: { phone, documentId, bankCode, bankName },
-  reference: 'pedido-123',
+  reference: 'order-123',
 });
 ```
 
-Cobra en USD desde el saldo del usuario y entrega bolívares por Pago Móvil a la cuenta del comercio, con confirmación nativa de la wallet y fondos protegidos por escrow. Con `batchTransactions` (máx 3) acoplás llamadas a tu propio contrato al cobro, en un batch atómico de una sola firma.
+Charges in USD from the user's balance and delivers bolívares over Pago Móvil to the merchant's account, with a native wallet confirmation and funds protected by escrow. With `batchTransactions` (max 3) you attach calls to your own contract to the charge, in an atomic batch with a single signature.
 
-Guía: https://cocowallet.mintlify.app/mini-apps/guias/paga-en-bolivares
+Guide: https://cocowallet.mintlify.app/mini-apps/guias/paga-en-bolivares
 
-## Dejar rastro en la wallet
+## Leaving a trace in the wallet
 
 ```ts
 await MiniApp.recordTransaction({
   txHash: hash,
   amount: 0.05,
   tokenSymbol: 'USDC',
-  comment: 'Pedido #123',
+  comment: 'Order #123',
 });
 ```
 
-Sin esto, el usuario ve el movimiento en su actividad sin contexto de qué compró.
+Without this, the user sees the movement in their activity with no clue what they bought.
 
-## Probar
+## Testing
 
-Necesitás la wallet **dev** y una cuenta con saldo insuficiente en el token que cobrás, y saldo suficiente en otra moneda en **Polygon, Base, Arbitrum u Optimism**. Ethereum y BNB están excluidos como origen: su gas hace que fondear montos chicos cueste más que el monto.
+You need the **dev** wallet and an account with an insufficient balance in the token you charge, plus enough balance in another coin on **Polygon, Base, Arbitrum or Optimism**. Ethereum and BNB are excluded as sources: their gas makes funding small amounts cost more than the amount itself.
 
-Si el origen está en otra red, la operación tarda ~30 s con un indicador de progreso, pero **sin pedir una segunda confirmación**.
+If the source is on another chain the operation takes ~30 s with a progress indicator, but **without asking for a second confirmation**.
