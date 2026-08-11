@@ -36,6 +36,7 @@ El server [`@cocowallet/miniapp-mcp`](https://www.npmjs.com/package/@cocowallet/
 |-------|----------|
 | `/mini-apps:ui-kit` | El theme de Coco Wallet: colores del design system, Poppins y tema oscuro. Se activa sola al crear o modificar UI |
 | `/mini-apps:frontend-design` | Guía de diseño de Anthropic para UIs distintivas, que no parezcan plantilla |
+| `/mini-apps:payments` | Cómo cobrar: transacciones, batches, cubrir el saldo corto del usuario con sus otras monedas, bolívares por Pago Móvil y los errores a manejar |
 
 ## Ejemplo
 
