@@ -1,6 +1,6 @@
 ---
 name: payments
-description: Use ALWAYS when a Coco mini app charges, pays or moves money — sendTransaction, batches, covering the user's short balance with their other coins (requiredFunds), charging in bolívares via Pago Móvil, recording the operation in the wallet, and handling the errors. Also when the user says "let it charge", "payments fail with insufficient funds", "accept other coins", "charge in bolívares", "add payments to the mini app", or in Spanish "que pueda cobrar", "los pagos fallan por saldo insuficiente", "que acepte otras monedas", "cobrar en bolívares", "agregar pagos a la mini app".
+description: Use ALWAYS when a Coco mini app charges, pays or moves money — sendTransaction, batches, covering the user's short balance with their other coins (requiredFunds), charging in bolívares via Pago Móvil, recording the operation in the wallet, and handling the errors. Also when the user says "let it charge", "payments fail with insufficient funds", "accept other coins", "charge in bolívares", "add payments to the mini app", "implement auto-swap", "add auto-swap", or in Spanish "implementar auto-swap", "agregar auto-swap", "que pueda cobrar", "los pagos fallan por saldo insuficiente", "que acepte otras monedas", "cobrar en bolívares", "agregar pagos a la mini app".
 ---
 
 # Payments in a Coco mini app
@@ -23,7 +23,7 @@ For several transactions that must land together or not at all → `sendTransact
 
 `chainId` accepts Polygon (137, the default) and Base (8453). It goes **on the batch**, not on each transaction.
 
-## The user has no balance in your token
+## Auto-swap: the user has no balance in your token
 
 This is the most common case and the one that kills the most sales: the user has money, just in another coin or another chain. Of the 16 tokens the wallet shows them, 14 live outside Polygon.
 
