@@ -1,6 +1,6 @@
 ---
 name: payments
-description: Use ALWAYS when a Coco mini app charges, pays or moves money — sendTransaction, batches, covering the user's short balance with their other coins (requiredFunds), charging in bolívares via Pago Móvil, recording the operation in the wallet, and handling the errors. Also when the user says "let it charge", "payments fail with insufficient funds", "accept other coins", "charge in bolívares", "add payments to the mini app", "implement auto-swap", "add auto-swap", or in Spanish "implementar auto-swap", "agregar auto-swap", "que pueda cobrar", "los pagos fallan por saldo insuficiente", "que acepte otras monedas", "cobrar en bolívares", "agregar pagos a la mini app".
+description: Use ALWAYS when a Coco mini app charges, pays or moves money — sendTransaction, batches, covering the user's short balance with their other coins (requiredFunds), charging in bolívares via Pago Móvil, recording the operation in the wallet, and handling the errors. Also when the user says "let it charge", "payments fail with insufficient funds", "accept other coins", "charge in bolívares", "add payments to the mini app", "implement auto-swap", "add auto-swap", "let the wallet confirm", "remove my review screen", or in Spanish "implementar auto-swap", "agregar auto-swap", "que pueda cobrar", "los pagos fallan por saldo insuficiente", "que acepte otras monedas", "cobrar en bolívares", "agregar pagos a la mini app", "que la wallet confirme la transacción", "quitar mi pantalla de revisión".
 ---
 
 # Payments in a Coco mini app
@@ -52,6 +52,29 @@ There is usually more than one bail-out, in different files — a preflight in t
 
 Keep the visual warning ("you're short X") if you want, but it **must not block**. Let the transaction through and handle whatever error the wallet returns.
 
+## Let the wallet run the confirmation screen
+
+Every mini app that charges ends up building the same three screens: a review, a spinner while the wallet signs, and a receipt. Add `confirm` and the wallet does it, in its own sheet:
+
+```ts
+await MiniApp.sendTransaction({
+  to: USDC,
+  data: encodeTransfer(merchant, amount),
+  chainId: CHAIN_IDS.BASE,
+  requiredFunds: { token: 'USDC', amount: '0.05' },
+  confirm: true,
+});
+```
+
+The sheet shows the amount, `token · network`, who's being paid, and the fee, with Confirm/Cancel. On confirm it **stays up** through the signature and shows the outcome inside it — your promise resolves when it's all over, so you never render a loading state of your own. Cancelling arrives as `USER_REJECTED`.
+
+- **`requiredFunds` is what makes it work.** The amount and token come from there — the same number the wallet checks the balance against, so the two can never disagree. Without it there is nothing to show and the flag is ignored.
+- **It composes with auto-swap.** If the balance falls short, the same sheet adds the conversion as a detail row under the payment: one confirmation, never two sheets in a row.
+- **It's a flag, not an object with your copy.** A native sheet rendering text you wrote would lend the wallet's face to claims the wallet can't verify. Everything specific to your business — the plan, the order, the merchant — belongs on **your** screen, before this.
+- In a batch it goes in the batch options, not on each transaction.
+
+What this means for your code: drop the review screen and the "processing…" state around `sendTransaction`. Keep your own success screen — it's what the user sees when the sheet closes.
+
 ## Errors to handle
 
 | Code | What it means | What to show |
@@ -69,10 +92,23 @@ They arrive as an `Error` whose message is `CODE: text`.
 Your mini app ships on its own, so it can run on a wallet older than the field you want to use. `capabilities()` is **synchronous** on purpose:
 
 ```ts
-if (MiniApp.capabilities().includes('funding.autoSwap')) {
+const caps = MiniApp.capabilities();
+if (caps.includes('funding.autoSwap')) {
   // show "pay with your other coins"
 }
+if (!caps.includes('tx.confirm')) {
+  // this wallet won't confirm for you — keep your own review screen
+}
 ```
+
+| Capability | What it unlocks |
+|---|---|
+| `funding.autoSwap` | `requiredFunds` — the wallet covers a short balance by converting |
+| `tx.confirm` | `confirm` — the wallet runs the review, the progress and the receipt |
+| `profile.extended` | `getUserInfo` returns email, birth date, gender and location |
+| `profile.identity` | `getUserInfo` returns the KYC status |
+
+An unknown field is ignored, never an error — so `confirm: true` on an older wallet just behaves as before. Gate only **your own** UI with this.
 
 Gate any UI of your own with this and you can ship before the new wallet is out: on older ones you keep your current behaviour, and it turns on by itself when the wallet arrives.
 
