@@ -1,6 +1,6 @@
 ---
 name: notifications
-description: Use ALWAYS when a Coco mini app wants to reach the user later — remind them, report a result, celebrate a win, nudge a deposit — with a push notification and an entry in the wallet's notification center, even when the mini app is closed. Covers the three ways to trigger one (per-user schedule from the SDK, app-level cron, server-to-server send from your own backend), the opt-in rules, the copy with placeholders, the signed webhook for per-user values, and how to debug "it didn't arrive". Also when the user says "notify the user", "send a push", "remind them every 15 days", "tell them when they win", "add notifications to the mini app", "schedule a notification", "webhook de notificaciones", or in Spanish "avisale al usuario", "mandá un push", "recordatorio", "notificación cada X días", "que le avise cuando gane", "agregar notificaciones a la mini app", "agendar una notificación".
+description: Use ALWAYS when a Coco mini app wants to reach the user later — remind them, report a result, celebrate a win, nudge a deposit — with a push notification and an entry in the wallet's notification center, even when the mini app is closed. Covers the three ways to trigger one (per-user schedule from the SDK, app-level cron, server-to-server send from your own backend), the opt-in rules, the copy with placeholders, the signed webhook for per-user values, and how to debug "it didn't arrive". Also when the user says "notify the user", "send a push", "remind them every week", "tell them when they win", "add notifications to the mini app", "schedule a notification", "webhook de notificaciones", or in Spanish "avisale al usuario", "mandá un push", "recordatorio", "notificación cada X días", "que le avise cuando gane", "agregar notificaciones a la mini app", "agendar una notificación".
 ---
 
 # Notifications in a Coco mini app
@@ -45,10 +45,10 @@ Call it right after the action the notification is about — the first deposit, 
 
 ## 3. Trigger it
 
-### Per-user schedule (SDK) — "every 15 days since their deposit"
+### Per-user schedule (SDK) — "every week since their deposit"
 
 ```ts
-await MiniApp.notifications.schedule({ key: 'yield_report', every: '15d' });
+await MiniApp.notifications.schedule({ key: 'yield_report', every: '7d' });
 ```
 
 `every` is `"<n>m|h|d|w"`, or pass a `cron`. Idempotent for the same key + recurrence, so an "ensure" on every deposit is fine. `list()` / `cancel(id)` manage them (cancel on full withdrawal). Errors: `NOTIFICATIONS_DISABLED:` (no opt-in yet), `INVALID_PARAMS:`, `NOTIFICATIONS_FAILED:` (unknown key, limits).
@@ -113,7 +113,7 @@ export async function POST(req: Request) {
 
 ## The two reference implementations
 
-- **Cochinito** — definition `yield_report` with a webhook that reads the vault on-chain. On the first successful deposit: `enable()` → `schedule({ key: 'yield_report', every: '15d' })`. On full withdrawal: `cancel`. Copy: *"Tu Cochinito generó ${{earned}} USDC 🐷 — Ya tenés ${{balance}} USDC ahorrando al {{apy}}% anual. Sumá otro depósito y hacé crecer el rendimiento."*
+- **Cochinito** — definition `yield_report` with a webhook that reads the vault on-chain. On the first successful deposit: `enable()` → `schedule({ key: 'yield_report', every: '7d' })`. On full withdrawal: `cancel`. Copy: *"Tu Cochinito generó ${{earned}} USDC esta semana 🐷 — Ya tenés ${{balance}} USDC ahorrando al {{apy}}% anual. Seguí sumando a tu Cochinito para ganar más."*
 - **Batea** — definition `bet_won`, `path: '/mis-apuestas'`. After the first bet: `enable()`. A Vercel Cron every 10 min asks the gateway for the subscribed addresses (`GET /notifications/subscribers?slug=batea`), checks the Azuro subgraph for `Won` bets, and `POST /notifications/send` with `idempotencyKey: bet_won:<betId>`. Copy: *"¡Ganaste! 🏆 — Tu apuesta en {{match}} pagó ${{amount}} USDT. Entrá a Batea para cobrar."*
 
 ## When it doesn't arrive
