@@ -27,6 +27,10 @@ El server [`@cocowallet/miniapp-mcp`](https://www.npmjs.com/package/@cocowallet/
 | `republish_mini_app` | Actualiza la entrada del catálogo (nueva URL, título, ícono) |
 | `generate_mini_app_icon` | Genera el ícono/logo de la app con `gpt-image-2`, usando los íconos glass de la wallet como referencia de estilo, y lo publica en el catálogo. Sin API keys: corre server-side |
 | `stop_mini_app` | Para el dev server y el túnel |
+| `create_notification` | Define (o actualiza) una notificación push + in-app de la mini app: copy con `{{placeholders}}`, `path` de deep link, `cron` opcional a nivel app y `webhookUrl` opcional para valores por usuario (firmado HMAC) |
+| `list_notifications` · `pause_notification` · `resume_notification` · `delete_notification` | Gestión de las notificaciones definidas |
+| `send_notification` | Envío inmediato a addresses/userIds que activaron notificaciones (para probar; es lo mismo que hace tu servidor con `POST /notifications/send`) |
+| `list_notification_deliveries` | Historial de envíos con estado y motivo, para depurar "¿por qué no le llegó?" |
 | `restart_tunnel` | Reabre el túnel si se cayó |
 | `close_tunnel` | Cierra el túnel dejando el dev server corriendo |
 
@@ -37,6 +41,7 @@ El server [`@cocowallet/miniapp-mcp`](https://www.npmjs.com/package/@cocowallet/
 | `/mini-apps:ui-kit` | El theme de Coco Wallet: colores del design system, Poppins y tema oscuro. Se activa sola al crear o modificar UI |
 | `/mini-apps:frontend-design` | Guía de diseño de Anthropic para UIs distintivas, que no parezcan plantilla |
 | `/mini-apps:payments` | Cómo cobrar: transacciones, batches, **auto-swap** (cubrir el saldo corto del usuario con sus otras monedas), bolívares por Pago Móvil y los errores a manejar |
+| `/mini-apps:notifications` | Cómo avisarle al usuario con la mini app cerrada: push + centro de notificaciones de la wallet, opt-in nativo, schedules por usuario ("cada 15 días"), cron a nivel app, envío desde tu servidor ("cuando gana") y el webhook firmado para valores por usuario |
 
 ## Ejemplo
 
