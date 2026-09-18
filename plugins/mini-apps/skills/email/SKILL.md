@@ -68,7 +68,7 @@ await coco.email.send({
 });
 ```
 
-`COCO_GATEWAY_URL`, `COCO_GATEWAY_TOKEN` and `COCO_MINIAPP_SLUG` land in `.env.local` when you create a template, and `deploy_mini_app` injects them into Vercel — the helper reads them itself. It **throws if it is ever constructed in the browser**, because that token is Coco's, not the user's. The tool `send_email` does the same thing from the assistant — use it to send yourself the first one.
+`COCO_GATEWAY_URL`, `COCO_MINIAPP_SLUG` and `COCO_EMAIL_TOKEN` land in `.env.local` when you create a template, and `deploy_mini_app` injects them into Vercel — the helper reads them itself. **Email never accepts an anonymous request**: sending from a domain verified for all of Coco without a credential would be an open relay, so the gateway mints a send token for your mini app the first time you create a template and shows it once. Lost or leaked ⇒ `rotate_email_token` (and re-deploy, so the deployed app gets a fresh one too). It **throws if it is ever constructed in the browser**, because that token is Coco's, not the user's. The tool `send_email` does the same thing from the assistant — use it to send yourself the first one.
 
 The three triggers all look like that call: your own API (above), a webhook from another system (same call inside the webhook handler, `idempotencyKey` derived from the event id — webhooks retry), and a cron (one call with up to 50 recipients, each with their own `params`).
 
