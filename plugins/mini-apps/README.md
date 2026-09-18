@@ -13,7 +13,7 @@ Dentro de Claude Code:
 
 Requisito: **Node ≥ 20**. Nada más — no hace falta ningún token por ahora, y el túnel de preview se maneja solo (si no tenés `cloudflared`, el MCP lo descarga automáticamente la primera vez).
 
-Ni siquiera para generar íconos con IA hace falta una API key: la generación corre en el gateway de Coco, no en tu máquina.
+Ni siquiera para generar íconos con IA hace falta una API key: la generación corre en el gateway de Coco, no en tu máquina. Lo mismo con el correo — tu mini app puede mandar mails sin crear cuenta en ningún proveedor.
 
 ## MCP incluido
 
@@ -31,6 +31,11 @@ El server [`@cocowallet/miniapp-mcp`](https://www.npmjs.com/package/@cocowallet/
 | `list_notifications` · `pause_notification` · `resume_notification` · `delete_notification` | Gestión de las notificaciones definidas |
 | `send_notification` | Envío inmediato a addresses/userIds que activaron notificaciones (para probar; es lo mismo que hace tu servidor con `POST /notifications/send`) |
 | `list_notification_deliveries` | Historial de envíos con estado y motivo, para depurar "¿por qué no le llegó?" |
+| `create_email_template` | Define (o actualiza) un correo de la mini app: asunto y cuerpo por **bloques** con `{{placeholders}}`, renderizado con el theme de Coco. Sin cuenta de proveedor ni API key |
+| `list_email_templates` · `delete_email_template` | Gestión de las plantillas de correo |
+| `preview_email` | Renderiza el correo **sin enviarlo** y deja el HTML en un archivo para abrirlo en el navegador |
+| `send_email` | Envía a direcciones concretas, con `idempotencyKey` para no duplicar. Es el espejo de `POST /email/send` desde tu servidor |
+| `list_emails` · `list_email_unsubscribes` | Historial de correos (estado y motivo) y quién se dio de baja |
 | `restart_tunnel` | Reabre el túnel si se cayó |
 | `close_tunnel` | Cierra el túnel dejando el dev server corriendo |
 
@@ -42,6 +47,8 @@ El server [`@cocowallet/miniapp-mcp`](https://www.npmjs.com/package/@cocowallet/
 | `/mini-apps:frontend-design` | Guía de diseño de Anthropic para UIs distintivas, que no parezcan plantilla |
 | `/mini-apps:payments` | Cómo cobrar: transacciones, batches, **auto-swap** (cubrir el saldo corto del usuario con sus otras monedas), bolívares por Pago Móvil y los errores a manejar |
 | `/mini-apps:notifications` | Cómo avisarle al usuario con la mini app cerrada: push + centro de notificaciones de la wallet, opt-in nativo, schedules por usuario ("cada semana"), cron a nivel app, envío desde tu servidor ("cuando gana") y el webhook firmado para valores por usuario |
+| `/mini-apps:email` | Cómo mandar correo **sin cuenta de proveedor ni API key**: plantillas por bloques con el theme de Coco, de dónde sale la dirección del usuario, el envío desde tu servidor, la baja obligatoria y cómo depurar "no me llegó" |
+| `/mini-apps:email-design` | El diseño de esos correos: qué bloque usa cada contenido, jerarquía, asunto y preheader, patrones listos (recibo, código, bienvenida, resumen) y el checklist antes de guardar |
 
 ## Ejemplo
 
