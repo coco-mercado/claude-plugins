@@ -59,21 +59,18 @@ The gateway token is a credential: it goes in a route handler, never in the brow
 
 ```ts
 // src/app/api/orders/[id]/ready/route.ts
-export const runtime = 'nodejs';
+import { coco } from '@cocowallet/miniapp-sdk/server';
 
-await fetch(`${process.env.COCO_GATEWAY_URL}/email/send`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${process.env.COCO_GATEWAY_TOKEN}` },
-  body: JSON.stringify({
-    slug: 'cafecito',
-    key: 'order_receipt',
-    to: [{ email, params: { nombre, orden, total, codigo } }],
-    idempotencyKey: `order_receipt:${orden}`,   // the gateway dedupes on this
-  }),
+await coco.email.send({
+  key: 'order_receipt',
+  to: [{ email, params: { nombre, orden, total, codigo } }],
+  idempotencyKey: `order_receipt:${orden}`,   // the gateway dedupes on this
 });
 ```
 
-`COCO_GATEWAY_URL` and `COCO_GATEWAY_TOKEN` land in `.env.local` when you create a template, and `deploy_mini_app` injects them into Vercel. The tool `send_email` does exactly the same thing — use it to send yourself the first one.
+`COCO_GATEWAY_URL`, `COCO_GATEWAY_TOKEN` and `COCO_MINIAPP_SLUG` land in `.env.local` when you create a template, and `deploy_mini_app` injects them into Vercel — the helper reads them itself. It **throws if it is ever constructed in the browser**, because that token is Coco's, not the user's. The tool `send_email` does the same thing from the assistant — use it to send yourself the first one.
+
+The three triggers all look like that call: your own API (above), a webhook from another system (same call inside the webhook handler, `idempotencyKey` derived from the event id — webhooks retry), and a cron (one call with up to 50 recipients, each with their own `params`).
 
 ### Where the address comes from
 
