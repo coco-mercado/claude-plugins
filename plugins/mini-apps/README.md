@@ -36,6 +36,10 @@ El server [`@cocowallet/miniapp-mcp`](https://www.npmjs.com/package/@cocowallet/
 | `preview_email` | Renderiza el correo **sin enviarlo** y deja el HTML en un archivo para abrirlo en el navegador |
 | `send_email` | Envía a direcciones concretas, con `idempotencyKey` para no duplicar. Es el espejo de `POST /email/send` desde tu servidor |
 | `list_emails` · `list_email_unsubscribes` | Historial de correos (estado y motivo) y quién se dio de baja |
+| `create_event` | Declara un evento de la mini app para **RD Station**. El gateway le pone el nombre (`miniapp-<slug>-<event>`) y resuelve el contacto del usuario |
+| `list_events` · `pause_event` · `delete_event` | Gestión del catálogo de eventos |
+| `send_test_event` | Dispara un evento de prueba para verificar el circuito hasta RD Station (crea un contacto real: usá tu correo) |
+| `list_event_deliveries` | Log de disparos con estado y motivo, para responder "¿por qué esto no aparece en RD?" |
 | `restart_tunnel` | Reabre el túnel si se cayó |
 | `close_tunnel` | Cierra el túnel dejando el dev server corriendo |
 
@@ -48,6 +52,7 @@ El server [`@cocowallet/miniapp-mcp`](https://www.npmjs.com/package/@cocowallet/
 | `/mini-apps:payments` | Cómo cobrar: transacciones, batches, **auto-swap** (cubrir el saldo corto del usuario con sus otras monedas), bolívares por Pago Móvil y los errores a manejar |
 | `/mini-apps:notifications` | Cómo avisarle al usuario con la mini app cerrada: push + centro de notificaciones de la wallet, opt-in nativo, schedules por usuario ("cada semana"), cron a nivel app, envío desde tu servidor ("cuando gana") y el webhook firmado para valores por usuario |
 | `/mini-apps:email` | Cómo mandar correo **sin cuenta de proveedor ni API key**: plantillas por bloques con el theme de Coco, de dónde sale la dirección del usuario, el envío desde tu servidor, la baja obligatoria y cómo depurar "no me llegó" |
+| `/mini-apps:events` | Qué eventos de la mini app registrar para marketing (el embudo, no los clics), la nomenclatura que impone el gateway, dónde disparar cada uno (cliente = intención, servidor = plata) y cómo depurar "no aparece en RD Station" |
 | `/mini-apps:email-design` | El diseño de esos correos: qué bloque usa cada contenido, jerarquía, asunto y preheader, patrones listos (recibo, código, bienvenida, resumen) y el checklist antes de guardar |
 
 ## Ejemplo
