@@ -1,0 +1,23 @@
+{
+  "skill_name": "email-design",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Agregale a Cafecito un correo de confirmación de pedido. Que diga el número de pedido, el total, el local donde se retira y el código de retiro.",
+      "expected_output": "Uses the receipt pattern: heading + short text + rows for order/total/local + code block for the pickup code + a single button. Subject with the order id, preheader that adds (not repeats). Runs preview_email with realistic params before saving the template.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "El correo de resumen semanal de Cochinito se ve feo y aburrido, mejoralo.",
+      "expected_output": "Reads the current template first (list_email_templates + preview_email), diagnoses the structure (the amount buried in prose, more than one action), moves the amount to a stat block, keeps one button, fixes subject/preheader, re-previews and updates the same key. Explains what changed in a line or two.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Diseñá el correo de código de verificación para mi mini app y que se vea como la wallet.",
+      "expected_output": "Uses the code pattern with a short code in a `code` block, no code in the subject, a note about expiry and 'if this wasn't you', no button, theme tokens untouched, and checks it against references/checklist.md.",
+      "files": []
+    }
+  ]
+}
