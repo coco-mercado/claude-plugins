@@ -18,7 +18,7 @@ Desde la v1.0 todo corre en el **conector remoto de Coco**: el código vive en u
 *Settings → Connectors → Add custom connector* con esta URL:
 
 ```
-https://gateway-mcp-production-3feb.up.railway.app/mcp
+https://mcp.cocowallet.app/mcp
 ```
 
 Las skills de abajo también llegan por el conector: Claude las lee con la tool `get_skill`, y las tenés como prompts (`/ui-kit`, `/payments`, …).

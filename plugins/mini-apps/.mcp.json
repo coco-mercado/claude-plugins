@@ -2,7 +2,7 @@
   "mcpServers": {
     "miniapp-publisher": {
       "type": "http",
-      "url": "https://gateway-mcp-production-3feb.up.railway.app/mcp"
+      "url": "https://mcp.cocowallet.app/mcp"
     }
   }
 }
