@@ -1,7 +1,7 @@
 {
   "name": "mini-apps",
-  "description": "Mini apps de Coco Mercado — publicación vía MCP (miniapp-publisher) y skills de desarrollo de mini apps",
-  "version": "0.16.0",
+  "description": "Mini apps de Coco Mercado — conector remoto (crear, editar, previsualizar y desplegar sin instalar nada) y skills de desarrollo de mini apps",
+  "version": "1.0.0",
   "author": {
     "name": "Coco Mercado"
   }
