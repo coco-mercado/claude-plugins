@@ -1,10 +1,21 @@
 ---
 name: frontend-design
-description: Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.
+description: "Guidance for distinctive, intentional layout, hierarchy, motion and copy when building new UI or reshaping an existing one. In Coco mini apps it works inside the ui-kit theme: palette and fonts come from ui-kit, never from this skill."
 license: Complete terms in LICENSE.txt
 ---
 
 # Frontend Design
+
+## In Coco mini apps: read this first
+
+The `ui-kit` skill wins over everything below. Palette, fonts, theme, primary button and touch targets are fixed by `ui-kit`. Where this guide talks about choosing a palette, display/body/utility typefaces, a light or cream background, or an "aesthetic risk" in color or type, **skip it**.
+
+- Your "token system" is the ui-kit tokens. Don't name new hex values.
+- Your typography is Poppins in its four weights. Make it memorable through scale, weight and spacing, not through another family.
+- Spend the distinctive choices on **layout, hierarchy, the signature element, imagery, motion and copy**.
+- If the brief asks for a light theme or a brand palette, follow `ui-kit` (Precedence), not "the brief always wins" below.
+
+_Coco change to the original Anthropic skill (Apache 2.0): this section and the description._
 
 Approach this as the design lead at a small studio known for giving every client a visual identity that could not be mistaken for anyone else's. This client has already rejected proposals that felt templated, and is paying for a distinctive point of view: make deliberate, opinionated choices about palette, typography, and layout that are specific to this brief, and take one real aesthetic risk you can justify.
 

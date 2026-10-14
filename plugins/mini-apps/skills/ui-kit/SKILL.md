@@ -5,7 +5,13 @@ description: Use ALWAYS before creating, adding or modifying any UI in a Coco mi
 
 # Coco Wallet theme — Mini Apps
 
-Mini apps run inside a WebView of the Coco wallet (a Flutter app, dark theme). This skill defines the **theme**: the tokens every UI must respect. It does not define layouts or components — each mini app's design is free and should have its own identity (don't imitate the wallet's screens), always within these tokens.
+Mini apps run inside a WebView of the Coco wallet (a Flutter app, dark theme). This skill defines the **theme**: the tokens every UI must respect. It does not define layouts or components: the layout, composition and signature of each mini app are free (don't imitate the wallet's screens), always within these tokens.
+
+## Precedence
+
+This skill **outranks** any other design guidance (`frontend-design`, generic design skills, your own taste) and the user's brief on five things: theme, colors, fonts, primary button and touch targets. Other skills decide layout, hierarchy, motion and copy, never palette or typography.
+
+If the user or the brief asks for something that breaks a rule (a light theme, their brand palette, another font), tell them it doesn't fit inside Coco Wallet, keep the rule, and express their brand through layout, imagery and copy. Their brand color can only be the app's catalog `color`/icon, not the UI background.
 
 ## Rules
 
@@ -15,6 +21,7 @@ Mini apps run inside a WebView of the Coco wallet (a Flutter app, dark theme). T
 4. **Green `#00AF71` = primary action and success.** Use it with intent, not as decoration.
 5. **Touch targets ≥ 44px**; it's a touch mobile app inside a WebView.
 6. **The layout is yours.** With these tokens, design a UI with its own identity for the mini app — don't replicate the wallet's home or screens.
+7. **Don't rewrite the template theme.** `tailwind.config.ts`, `globals.css` and `layout.tsx` already ship the kit: extend them, never replace the Coco tokens with your own palette.
 
 ## Setup (check this first)
 
@@ -103,3 +110,5 @@ Use Tailwind's **default scale** (`p-4`, `gap-3`, `rounded-lg`, `rounded-xl`, `r
 - [ ] Green only for primary action / success
 - [ ] Touch targets ≥ 44px; secondary text `#C1C1C1` or lighter on dark background
 - [ ] The design has its own identity — it's not a copy of the wallet's screens
+- [ ] Quality pass done: states, accessibility, motion and copy (see `references/quality.md`)
+- [ ] `npm run check:ui-kit` passes (same checks as the connector: dark theme, Coco palette, Poppins)

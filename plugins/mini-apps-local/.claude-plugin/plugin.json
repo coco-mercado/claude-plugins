@@ -1,0 +1,8 @@
+{
+  "name": "mini-apps-local",
+  "displayName": "Mini apps (MCP local)",
+  "description": "Uso interno: el plugin mini-apps con el MCP local por stdio (npx) en vez del conector remoto",
+  "author": {
+    "name": "Coco Mercado"
+  }
+}

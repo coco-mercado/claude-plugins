@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "miniapp-publisher": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@cocowallet/miniapp-mcp@0.15.0"
+      ]
+    }
+  }
+}
