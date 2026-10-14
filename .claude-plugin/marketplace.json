@@ -1,6 +1,6 @@
 {
   "name": "coco-plugins",
-  "description": "Plugins de Claude Code de Coco Mercado — herramientas internas para desarrollo de mini apps y wallet",
+  "description": "Plugins de Coco Mercado para Claude: crea y publica mini apps de Coco Wallet",
   "owner": {
     "name": "Coco Mercado"
   },
@@ -8,7 +8,12 @@
     {
       "name": "mini-apps",
       "source": "./plugins/mini-apps",
-      "description": "MCP y skills para desarrollar y publicar mini apps de Coco Mercado"
+      "description": "Conector remoto y skills para crear y publicar mini apps de Coco Wallet"
+    },
+    {
+      "name": "mini-apps-local",
+      "source": "./plugins/mini-apps-local",
+      "description": "Uso interno: las mismas skills con el MCP local (stdio) en vez del conector remoto"
     }
   ]
 }

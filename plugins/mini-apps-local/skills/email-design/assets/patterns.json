@@ -1,0 +1,60 @@
+{
+  "_readme": "Starting points for a mini app email. Copy the closest one, swap the copy and the {{params}}, preview it. Each already follows one-job / one-button / payload-in-a-block.",
+  "receipt": {
+    "when": "Something was paid or ordered and the person should be able to find it again months later.",
+    "subject": "Tu pedido #{{orden}} está confirmado",
+    "preheader": "Total ${{total}} · retirás en {{local}}",
+    "blocks": [
+      { "type": "heading", "text": "Pedido confirmado" },
+      { "type": "text", "text": "Gracias {{nombre}}. Te avisamos apenas esté listo para retirar." },
+      { "type": "rows", "rows": [
+        { "label": "Pedido", "value": "#{{orden}}" },
+        { "label": "Total", "value": "${{total}}" },
+        { "label": "Local", "value": "{{local}}" }
+      ] },
+      { "type": "button", "text": "Ver el pedido", "url": "{{url}}" },
+      { "type": "note", "text": "Guardá este correo: es tu comprobante." }
+    ]
+  },
+  "code": {
+    "when": "The person has to read something off the screen and type it somewhere else.",
+    "subject": "Tu código de {{motivo}}",
+    "preheader": "Vence en 15 minutos",
+    "blocks": [
+      { "type": "heading", "text": "Tu código" },
+      { "type": "text", "text": "Ingresalo en {{app}} para continuar." },
+      { "type": "code", "value": "{{codigo}}", "label": "código de {{motivo}}" },
+      { "type": "note", "text": "Vence en 15 minutos. Si no fuiste vos, ignorá este correo — no hace falta que hagas nada." }
+    ]
+  },
+  "welcome": {
+    "when": "First meaningful action in the mini app. Says what they can do now, not what the company is.",
+    "subject": "Listo, ya estás en {{app}}",
+    "preheader": "Esto es lo que podés hacer desde ahora",
+    "blocks": [
+      { "type": "heading", "text": "Bienvenido a {{app}}" },
+      { "type": "text", "text": "Hola {{nombre}}, tu cuenta quedó activa." },
+      { "type": "list", "items": [
+        "{{beneficio_1}}",
+        "{{beneficio_2}}",
+        "{{beneficio_3}}"
+      ] },
+      { "type": "button", "text": "Abrir {{app}}", "url": "{{url}}" },
+      { "type": "note", "text": "Te escribimos porque usás {{app}} dentro de Coco Wallet." }
+    ]
+  },
+  "summary": {
+    "when": "Recurring report — the one number matters more than the detail.",
+    "subject": "Ganaste ${{monto}} esta semana",
+    "preheader": "Tu resumen de {{app}}",
+    "blocks": [
+      { "type": "heading", "text": "Tu semana en {{app}}" },
+      { "type": "stat", "value": "${{monto}}", "label": "ganado esta semana" },
+      { "type": "rows", "rows": [
+        { "label": "Saldo", "value": "${{saldo}}" },
+        { "label": "Rendimiento anual", "value": "{{apy}}%" }
+      ] },
+      { "type": "button", "text": "Ver el detalle", "url": "{{url}}" }
+    ]
+  }
+}

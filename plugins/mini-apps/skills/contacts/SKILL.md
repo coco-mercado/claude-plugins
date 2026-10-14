@@ -19,7 +19,7 @@ setRecipient(contact);
 
 | Option | Default | What it does |
 |---|---|---|
-| `title` | `"Elige un contacto"` | Sheet title, ≤ 60 chars. Say what the pick is for. |
+| `title` | `"Selecciona un destinatario"` (same as the wallet's send flow) | Sheet title, ≤ 60 chars. Say what the pick is for. |
 | `onlyCocoUsers` | `false` | `true` hides the phone-book section and lists only Coco users. Use it when you will pay or tag a wallet. |
 
 ## What you get back
