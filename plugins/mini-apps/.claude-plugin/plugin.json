@@ -1,9 +1,0 @@
-{
-  "name": "mini-apps",
-  "displayName": "Coco Mini Apps",
-  "version": "0.17.2",
-  "description": "Crea, prueba y publica mini apps de Coco Wallet desde la conversación: conector remoto de Coco y skills de desarrollo (UI kit, pagos, notificaciones, correo, eventos, contactos)",
-  "author": {
-    "name": "Coco Mercado"
-  }
-}

@@ -1,0 +1,15 @@
+{
+  "name": "coco-mini-apps",
+  "displayName": "Coco Mini Apps",
+  "version": "0.17.2",
+  "description": "Crea, prueba y publica mini apps de Coco Wallet desde la conversación: conector remoto de Coco y skills de desarrollo (UI kit, pagos, notificaciones, correo, eventos, contactos)",
+  "author": {
+    "name": "Coco Mercado",
+    "url": "https://cocowallet.app"
+  },
+  "homepage": "https://cocowallet.app",
+  "repository": "https://github.com/coco-mercado/claude-plugins",
+  "license": "MIT",
+  "privacyPolicyUrl": "https://cocowallet.app/politica-de-privacidad",
+  "keywords": ["coco-wallet", "mini-apps", "web3", "payments", "usdc", "nextjs"]
+}

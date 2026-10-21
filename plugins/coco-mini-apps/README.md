@@ -6,11 +6,11 @@ Funciona en claude.ai, Cowork y Claude Code. No hace falta instalar Node ni nada
 
 ## Instalación
 
-**claude.ai (y Cowork):** Customize › Plugins › Add › **Add marketplace** → `coco-mercado/claude-plugins` → instala **Coco Mini Apps**. Después, en la pestaña **Connectors** del plugin, conecta *coco-mini-apps* e inicia sesión con tu wallet. El plugin aparece también en Claude Code (como `mini-apps@synced`) si usas la misma cuenta.
+**claude.ai (y Cowork):** Customize › Plugins › Add › **Add marketplace** → `coco-mercado/claude-plugins` → instala **Coco Mini Apps**. Después, en la pestaña **Connectors** del plugin, conecta *coco-mini-apps* e inicia sesión con tu wallet. El plugin aparece también en Claude Code (como `coco-mini-apps@synced`) si usas la misma cuenta.
 
-**Claude Code:** `claude plugin marketplace add coco-mercado/claude-plugins` y `claude plugin install mini-apps@coco-plugins`. La primera vez que Claude use el conector te pedirá iniciar sesión.
+**Claude Code:** `claude plugin marketplace add coco-mercado/claude-plugins` y `claude plugin install coco-mini-apps@coco-plugins`. La primera vez que Claude use el conector te pedirá iniciar sesión.
 
-**Actualizar:** Update en la ficha del plugin (claude.ai) o `claude plugin update mini-apps@coco-plugins` (Claude Code).
+**Actualizar:** Update en la ficha del plugin (claude.ai) o `claude plugin update coco-mini-apps@coco-plugins` (Claude Code).
 
 ## Uso
 

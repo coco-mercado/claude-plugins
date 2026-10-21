@@ -7,7 +7,7 @@ description: "Use ALWAYS when designing, reviewing or improving the LOOK of a Co
 
 The gateway already guarantees the *shell*: dark background, Poppins, the green, the header with the app's icon, the footer with the unsubscribe link, tables that survive Gmail and Outlook. What it cannot guarantee is the part that decides whether an email works — **what goes in it, in what order, and what the person is supposed to do**. That's this skill.
 
-Mechanics of sending (tools, params, the server call) live in `/mini-apps:email`. Load that one too if you're wiring the send.
+Mechanics of sending (tools, params, the server call) live in `/coco-mini-apps:email`. Load that one too if you're wiring the send.
 
 ## The pass
 
@@ -69,7 +69,7 @@ Run through `references/checklist.md` before saving the template. It catches the
 
 ## Theme, concretely
 
-The tokens are the wallet's (same ones `/mini-apps:ui-kit` gives the mini app's screens), applied by the renderer:
+The tokens are the wallet's (same ones `/coco-mini-apps:ui-kit` gives the mini app's screens), applied by the renderer:
 
 | Role | Token | Where it shows |
 |---|---|---|

@@ -17,7 +17,7 @@ Listo: pídele a Claude "crea una mini app de Coco que…". El plugin también a
 
 ```
 claude plugin marketplace add coco-mercado/claude-plugins
-claude plugin install mini-apps@coco-plugins
+claude plugin install coco-mini-apps@coco-plugins
 ```
 
 La primera vez que uses una herramienta del conector, Claude Code abre el login con Coco Wallet.
@@ -25,7 +25,8 @@ La primera vez que uses una herramienta del conector, Claude Code abre el login 
 ## Actualizar
 
 - **claude.ai:** Customize → Plugins → Coco Mini Apps → Update.
-- **Claude Code:** `claude plugin update mini-apps@coco-plugins` (o activa auto-update del marketplace en `/plugin`).
+- **Claude Code:** `claude plugin update coco-mini-apps@coco-plugins` (o activa auto-update del marketplace en `/plugin`).
+- **Si lo instalaste como `mini-apps`** (antes de octubre de 2026 el plugin se llamaba así): en Claude Code, `claude plugin uninstall mini-apps@coco-plugins`, `claude plugin marketplace update coco-plugins` y `claude plugin install coco-mini-apps@coco-plugins`. En claude.ai, quita Coco Mini Apps y vuelve a instalarlo desde el marketplace.
 
 ## Plugins
 

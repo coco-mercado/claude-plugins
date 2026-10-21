@@ -6,8 +6,8 @@
   },
   "plugins": [
     {
-      "name": "mini-apps",
-      "source": "./plugins/mini-apps",
+      "name": "coco-mini-apps",
+      "source": "./plugins/coco-mini-apps",
       "description": "Conector remoto y skills para crear y publicar mini apps de Coco Wallet"
     },
     {

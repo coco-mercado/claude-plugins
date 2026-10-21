@@ -7,7 +7,7 @@ description: Use ALWAYS when a Coco mini app needs to send email — a receipt, 
 
 A mini app can email its users **without creating an account anywhere and without holding an API key**. The gateway sends through Coco's Resend account, from a verified domain, and hands you back the provider's verdict. Same rule as icons, deploys and databases: paid credentials never touch the builder's machine.
 
-**Email or notification?** A push notification is for *now, inside the wallet* ("you won", "your yield is ready") and dies in the notification center. Email is for what the person keeps or reads elsewhere: receipts, order confirmations, codes, monthly summaries, anything they may forward or search for months later. When in doubt: would they look for it in their inbox a week later? Then it's email. Many flows want both — see `/mini-apps:notifications`.
+**Email or notification?** A push notification is for *now, inside the wallet* ("you won", "your yield is ready") and dies in the notification center. Email is for what the person keeps or reads elsewhere: receipts, order confirmations, codes, monthly summaries, anything they may forward or search for months later. When in doubt: would they look for it in their inbox a week later? Then it's email. Many flows want both — see `/coco-mini-apps:notifications`.
 
 ## 1. Define the email (MCP)
 
@@ -41,7 +41,7 @@ Available: `heading`, `text`, `button`, `stat` (a big number), `code` (monospace
 
 The gateway renders them in the wallet's theme — `#181818`, Poppins, green `#00AF71` — as tables that Gmail and Outlook actually support, and writes the plain-text alternative for you. **Don't hand-write email HTML**: mail clients have no flexbox, no grid, no external CSS, and Gmail clips anything over ~102 KB. There is an `html` escape hatch (sanitized, wrapped in the same shell) for the rare layout blocks can't express.
 
-For the copy and layout decisions themselves — hierarchy, one primary action, when a `stat` beats a paragraph — load `/mini-apps:email-design`.
+For the copy and layout decisions themselves — hierarchy, one primary action, when a `stat` beats a paragraph — load `/coco-mini-apps:email-design`.
 
 ## 2. Look at it before sending
 

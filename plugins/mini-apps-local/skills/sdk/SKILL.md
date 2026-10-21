@@ -36,7 +36,7 @@ import { MiniApp } from '@cocowallet/miniapp-sdk';
 | `getUserInfo()` | `UserInfo` | Full profile. See below — most fields are `null` when the user hasn't filled them in, never as a sign of a failed call. |
 | `sendTransaction({ to, data?, value? })` | `{ hash }` | Gas paid by Coco. `value` hex or decimal string; `"0x0"` for none. |
 | `sendTransactionBatch(txs)` | `{ hash }` | Atomic ERC-4337 batch, one nonce (e.g. approve + call). |
-| `signMessage(message)` | `{ signature }` | `personal_sign`. |
+| `signMessage(message)` | `{ signature }` | `personal_sign` with the smart account's owner EOA. To check it on the server, `verifyMessage` alone always fails: use `references/verify-signature.md`. |
 | `signTypedData(data)` | `{ signature }` | EIP-712 (e.g. USDC permit). |
 | `pickContact({ title?, onlyCocoUsers? })` | `PickedContact \| null` | Native contact sheet (saved, phone book, search by email/wallet/phone); only the picked contact is shared; `null` = user closed it. `{ name, phone (E.164 with "+"), walletAddress, email (only when the user searched by it), isCocoUser, source }`. Check `capabilities().includes('contacts.pick')`. |
 | `getContacts()` | `WalletContact[]` | **Deprecated → `pickContact`.** `{ name, phone }` (digits, no "+"); still works on old mini apps. |
