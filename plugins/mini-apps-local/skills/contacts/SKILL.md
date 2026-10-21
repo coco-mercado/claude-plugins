@@ -41,7 +41,7 @@ interface PickedContact {
 ## Rules
 
 1. **Cancelling resolves `null`.** Closing the sheet with the ×, a drag down, a tap outside or the back button resolves `null`. It doesn't throw, so don't show an error.
-2. **One native sheet at a time.** While the picker is open, a second `pickContact`, `sendTransaction` or signature call rejects with `BUSY:`. To chain *pick → pay*, **await the pick first**, then call the payment (see `/mini-apps:payments`).
+2. **One native sheet at a time.** While the picker is open, a second `pickContact`, `sendTransaction` or signature call rejects with `BUSY:`. To chain *pick → pay*, **await the pick first**, then call the payment (see `/coco-mini-apps:payments`).
 3. **Older wallets.** Before this method existed, the call rejected with `PICK_CONTACT_UNSUPPORTED:`. Check the capability first and fall back to your own phone or wallet input:
    ```ts
    if (MiniApp.capabilities().includes('contacts.pick')) {
