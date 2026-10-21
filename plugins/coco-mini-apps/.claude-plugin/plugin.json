@@ -11,5 +11,15 @@
   "repository": "https://github.com/coco-mercado/claude-plugins",
   "license": "MIT",
   "privacyPolicyUrl": "https://cocowallet.app/politica-de-privacidad",
-  "keywords": ["coco-wallet", "mini-apps", "web3", "payments", "usdc", "nextjs"]
+  "termsOfServiceUrl": "https://cocowallet.app/terminos-y-condiciones",
+  "documentationUrl": "https://cocowallet.mintlify.app/mini-apps/instalar-plugin",
+  "supportUrl": "https://cocowallet.app/contacto",
+  "keywords": [
+    "coco-wallet",
+    "mini-apps",
+    "web3",
+    "payments",
+    "usdc",
+    "nextjs"
+  ]
 }
