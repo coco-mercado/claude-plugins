@@ -1,36 +1,48 @@
-# Coco Mini Apps para Claude
+<img src="plugins/coco-mini-apps/.claude-plugin/icon.png" alt="" width="72" />
 
-Plugin oficial de [Coco Wallet](https://cocowallet.app) para crear, probar y publicar mini apps desde una conversación con Claude. Trae el conector de Coco (crear la app, editar, desplegar, ícono, notificaciones, correo) y las guías de Coco (UI kit, pagos, notificaciones, correo, eventos, contactos) que Claude usa solo cuando hacen falta.
+# Coco plugins for Claude
 
-> Este repo se publica automáticamente desde el repo interno de la plataforma. No abras PRs aquí.
+Official [Coco Wallet](https://cocowallet.app) plugins for Claude. Build, preview, and publish Coco Wallet mini apps from a conversation in claude.ai, Cowork, or Claude Code.
 
-## Instalar en claude.ai o en la app de Claude
+> [!NOTE]
+> This repo is published automatically from Coco's internal platform repo, so pull requests here are overwritten. For help, go to [cocowallet.app/contacto](https://cocowallet.app/contacto).
 
-1. Ve a **Customize → Plugins** ([claude.ai/customize/plugins](https://claude.ai/customize/plugins)).
-2. **Add → Add marketplace** y escribe `coco-mercado/claude-plugins`.
-3. Instala **Coco Mini Apps** (`mini-apps`).
-4. En la pestaña **Connectors** del plugin, conecta **coco-mini-apps** y aprueba el acceso desde tu Coco Wallet.
+## Plugins
 
-Listo: pídele a Claude "crea una mini app de Coco que…". El plugin también aparece en Claude Code con la misma cuenta.
+| Plugin | For |
+|---|---|
+| [`coco-mini-apps`](plugins/coco-mini-apps) | Mini app builders. The Coco connector plus the Coco skills. |
+| `mini-apps-local` | The Coco team. Same skills with the local MCP server; requires internal credentials. |
 
-## Instalar en Claude Code
+## Install
 
-```
+**claude.ai and Cowork:** go to **Customize → Plugins → Add → Add marketplace**, enter `coco-mercado/claude-plugins`, and install **Coco Mini Apps**. Then connect **coco-mini-apps** in the plugin's **Connectors** tab and approve access from your Coco Wallet.
+
+**Claude Code:**
+
+```bash
 claude plugin marketplace add coco-mercado/claude-plugins
 claude plugin install coco-mini-apps@coco-plugins
 ```
 
-La primera vez que uses una herramienta del conector, Claude Code abre el login con Coco Wallet.
+Setup details, example prompts, and the list of skills are in the [plugin README](plugins/coco-mini-apps).
 
-## Actualizar
+## Update
 
-- **claude.ai:** Customize → Plugins → Coco Mini Apps → Update.
-- **Claude Code:** `claude plugin update coco-mini-apps@coco-plugins` (o activa auto-update del marketplace en `/plugin`).
-- **Si lo instalaste como `mini-apps`** (antes de octubre de 2026 el plugin se llamaba así): en Claude Code, `claude plugin uninstall mini-apps@coco-plugins`, `claude plugin marketplace update coco-plugins` y `claude plugin install coco-mini-apps@coco-plugins`. En claude.ai, quita Coco Mini Apps y vuelve a instalarlo desde el marketplace.
+- **claude.ai:** Customize → Plugins → Coco Mini Apps → **Update**.
+- **Claude Code:** `claude plugin update coco-mini-apps@coco-plugins`.
 
-## Plugins
+<details>
+<summary>Installed it as <code>mini-apps</code>?</summary>
 
-| Plugin | Para quién |
-|---|---|
-| `mini-apps` | Builders de mini apps: conector remoto de Coco + guías. |
-| `mini-apps-local` | Equipo de Coco: las mismas guías con el MCP local (stdio). Requiere credenciales internas. |
+The plugin was renamed to `coco-mini-apps` in October 2026. In Claude Code:
+
+```bash
+claude plugin uninstall mini-apps@coco-plugins
+claude plugin marketplace update coco-plugins
+claude plugin install coco-mini-apps@coco-plugins
+```
+
+In claude.ai, remove Coco Mini Apps and install it again from the marketplace.
+
+</details>
