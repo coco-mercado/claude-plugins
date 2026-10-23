@@ -89,4 +89,4 @@ The tokens are the wallet's (same ones `/coco-mini-apps:ui-kit` gives the mini a
 4. Rewrite the blocks, re-preview, and put the two renders side by side before saving.
 5. `create_email_template` with the same `key` — it updates in place, no redeploy.
 
-Tell the user what changed and why in one or two lines ("el monto pasó a `stat` y saqué el segundo botón"), not a list of every tweak.
+Tell the user what changed and why in one or two lines ("moved the amount to a `stat` block and dropped the second button"), not a list of every tweak.

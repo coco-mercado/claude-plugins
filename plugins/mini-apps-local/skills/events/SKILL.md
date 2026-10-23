@@ -18,7 +18,7 @@ you declare:   plan_creado
 marketing sees: miniapp-cochinito-plan_creado     + tags: miniapp, miniapp-cochinito
 ```
 
-That prefix is what lets marketing segment *one app* (`conversión contiene miniapp-cochinito-`), *one event*, or *every mini app at once* (`contiene miniapp-`). It is also why the event key takes no dashes: the dash is the separator.
+That prefix is what lets marketing segment *one app* (`conversion contains miniapp-cochinito-`), *one event*, or *every mini app at once* (`contains miniapp-`). It is also why the event key takes no dashes: the dash is the separator.
 
 And the second thing: **conversion events in RD are never deleted.** A typo, a plural you regret, a test event named `prueba` — it stays in the account marketing uses, forever. Which is why every event has to be declared before it can be fired.
 
