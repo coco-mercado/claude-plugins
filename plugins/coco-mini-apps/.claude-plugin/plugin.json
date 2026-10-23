@@ -1,7 +1,7 @@
 {
   "name": "coco-mini-apps",
   "displayName": "Coco Mini Apps",
-  "version": "0.17.2",
+  "version": "0.18.0",
   "description": "Build, preview, and publish Coco Wallet mini apps from a conversation: the remote Coco connector plus development skills (UI kit, payments, notifications, email, events, contacts)",
   "author": {
     "name": "Coco Mercado",

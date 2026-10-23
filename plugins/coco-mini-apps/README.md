@@ -47,6 +47,12 @@ The tools work, but the skills won't load, so results drift from the Coco UI kit
 
 </details>
 
+### Local mode (Coco team)
+
+The plugin also ships Coco's local MCP server, for building a mini app in a folder on your machine with a dev server and a tunnel instead of the cloud workspace. It's off by default and adds no tools.
+
+To turn it on in Claude Code, set `COCO_MINIAPPS_LOCAL=1` in your environment (or under `env` in `~/.claude/settings.json`) and restart Claude Code. It needs Node 20 or later. claude.ai ignores it.
+
 ### Updating
 
 - **claude.ai:** Customize → Plugins → Coco Mini Apps → **Update**.

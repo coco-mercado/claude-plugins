@@ -8,12 +8,7 @@
     {
       "name": "coco-mini-apps",
       "source": "./plugins/coco-mini-apps",
-      "description": "Remote connector and skills to build and publish Coco Wallet mini apps"
-    },
-    {
-      "name": "mini-apps-local",
-      "source": "./plugins/mini-apps-local",
-      "description": "Internal use: the same skills with the local stdio MCP server instead of the remote connector"
+      "description": "Remote connector, optional local MCP, and skills to build and publish Coco Wallet mini apps"
     }
   ]
 }

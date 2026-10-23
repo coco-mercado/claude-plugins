@@ -1,8 +1,0 @@
-{
-  "name": "mini-apps-local",
-  "displayName": "Mini apps (local MCP)",
-  "description": "Internal use: the Coco Mini Apps skills with the local stdio MCP server (npx) instead of the remote connector",
-  "author": {
-    "name": "Coco Mercado"
-  }
-}

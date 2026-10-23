@@ -9,10 +9,9 @@ Official [Coco Wallet](https://cocowallet.app) plugins for Claude. Build, previe
 
 ## Plugins
 
-| Plugin | For |
+| Plugin | What it includes |
 |---|---|
-| [`coco-mini-apps`](plugins/coco-mini-apps) | Mini app builders. The Coco connector plus the Coco skills. |
-| `mini-apps-local` | The Coco team. Same skills with the local MCP server; requires internal credentials. |
+| [`coco-mini-apps`](plugins/coco-mini-apps) | The Coco connector, the Coco skills, and an optional local mode for the Coco team. |
 
 ## Install
 
@@ -44,5 +43,20 @@ claude plugin install coco-mini-apps@coco-plugins
 ```
 
 In claude.ai, remove Coco Mini Apps and install it again from the marketplace.
+
+</details>
+
+<details>
+<summary>Using <code>mini-apps-local</code>?</summary>
+
+It's now the local mode of `coco-mini-apps`. In Claude Code:
+
+```bash
+claude plugin uninstall mini-apps-local@coco-plugins
+claude plugin marketplace update coco-plugins
+claude plugin install coco-mini-apps@coco-plugins
+```
+
+Then set `COCO_MINIAPPS_LOCAL=1` in your environment and restart Claude Code.
 
 </details>
