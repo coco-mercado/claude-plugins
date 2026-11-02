@@ -92,10 +92,11 @@ More prompts to try:
 | `email` | Sending email without a provider account or API key |
 | `email-design` | Making those emails look like the wallet |
 | `events` | Tracking in-app events for marketing (RD Station) |
+| `knowledge-base` | The document Coco's support team uses to help your users, and the FAQ shown in the wallet |
 
 ## Data and privacy
 
-The connector sends Coco your mini app's code, its configuration (title, icon, notifications, emails, events), and your wallet address to identify you. The plugin stores nothing on its own and ships no keys or secrets. See the [privacy policy](https://cocowallet.app/politica-de-privacidad) and [terms](https://cocowallet.app/terminos-y-condiciones).
+The connector sends Coco your mini app's code, its configuration (title, icon, notifications, emails, events), its knowledge base (read by Coco's support team; the FAQ is shown to users), and your wallet address to identify you. The plugin stores nothing on its own and ships no keys or secrets. See the [privacy policy](https://cocowallet.app/politica-de-privacidad) and [terms](https://cocowallet.app/terminos-y-condiciones).
 
 ## Support
 

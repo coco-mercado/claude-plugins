@@ -8,7 +8,7 @@
       "command": "node",
       "args": [
         "${CLAUDE_PLUGIN_ROOT}/scripts/local-mcp.mjs",
-        "@cocowallet/miniapp-mcp@0.15.0"
+        "@cocowallet/miniapp-mcp@0.16.0"
       ]
     }
   }
