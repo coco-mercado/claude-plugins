@@ -67,4 +67,4 @@ Full-width, rounded. **Images are off by default in most clients**, so an image 
 
 ## The `html` escape hatch
 
-`html` replaces the whole body with your own markup, still wrapped in the Coco shell and sanitized (no `<script>`, no `on*` handlers, no non-http URLs). Use it when the content genuinely doesn't fit the blocks — a two-column comparison, an embedded table from another system. Everything you gain in freedom you lose in client compatibility and theme consistency, so it is the last option, not the first.
+`html` replaces the whole body with your own markup, still wrapped in the Coco shell and sanitized (only inline styles, no `<script>`, no `on*` handlers, no non-http URLs; details in `html-pattern.md`). It has one well-trodden use: **state notifications**, built from the ready-made pattern in `html-pattern.md` with `header: false`. Beyond that, use it only when the content genuinely doesn't fit the blocks — a two-column comparison, a table from another system — and accept that you now own client compatibility and dark mode.

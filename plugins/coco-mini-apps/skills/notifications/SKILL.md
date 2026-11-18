@@ -13,6 +13,11 @@ Three pieces, and you own only the copy and the trigger:
 2. **The opt-in** — `MiniApp.notifications.enable()` shows the **wallet's** native consent sheet. Nobody receives anything without accepting. The user can turn it off from the mini app's top-bar menu at any time.
 3. **The trigger** — one of the three below.
 
+## What the user sees
+
+- A **push** (when the OS allows it) and an entry in the wallet's notification center. Tapping either one opens your mini app on `path`.
+- A **red counter on your mini app's icon** in the wallet Home and in "Ver todas". It counts the notifications sent to that user since they last opened your mini app, looking back at most 14 days, and shows "9+" from 10 on. Opening the mini app from any tile clears it. You don't call anything for this: every `sent` delivery adds one, so a noisy notification shows up as a noisy counter.
+
 ## 1. Define the notification (MCP)
 
 Ask the assistant to run `create_notification` for the mini app:

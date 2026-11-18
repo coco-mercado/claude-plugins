@@ -332,6 +332,17 @@ stable production URL — no Vercel account or token needed on this machine. The
 the dev tunnel while it's alive and falls back to the production URL when the dev server
 stops. Re-run it on each stable version (same URL).
 
+- Production only switches when the new build answers; a build that serves 5xx stays out and
+  production keeps the previous version.
+- The first deploy claims the app: the MCP keeps its deploy credential and sends it next
+  time. Nobody else can deploy over your app.
+- Commit before deploying: the deploy records the git commit, so each version in production
+  is a known sha.
+- `promote_mini_app` with `version: "previous"` rolls back instantly, without rebuilding;
+  `list_deploys` shows what is live. With the local MCP, `deploy_mini_app` with
+  `stage: true` leaves the build in staging (the dev wallet opens it, production doesn't
+  change) until `promote_mini_app`.
+
 ## Don't
 
 - Don't add a wallet-connect / web3 provider — the wallet IS the provider via the bridge.

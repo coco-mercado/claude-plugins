@@ -1,5 +1,5 @@
 {
-  "_readme": "Starting points for a mini app email. Copy the closest one, swap the copy and the {{params}}, preview it. Each already follows one-job / one-button / payload-in-a-block.",
+  "_readme": "Block-based starting points for emails that ARE the data: a receipt, a code, a periodic number. Copy the closest one, swap the copy and the {{params}}, preview it. Each already follows one-job / one-button / payload-in-a-block. State notifications (approved, in review, money ready, welcome…) use references/html-pattern.md instead.",
   "receipt": {
     "when": "Something was paid or ordered and the person should be able to find it again months later.",
     "subject": "Tu pedido #{{orden}} está confirmado",
@@ -25,22 +25,6 @@
       { "type": "text", "text": "Ingresalo en {{app}} para continuar." },
       { "type": "code", "value": "{{codigo}}", "label": "código de {{motivo}}" },
       { "type": "note", "text": "Vence en 15 minutos. Si no fuiste vos, ignorá este correo — no hace falta que hagas nada." }
-    ]
-  },
-  "welcome": {
-    "when": "First meaningful action in the mini app. Says what they can do now, not what the company is.",
-    "subject": "Listo, ya estás en {{app}}",
-    "preheader": "Esto es lo que podés hacer desde ahora",
-    "blocks": [
-      { "type": "heading", "text": "Bienvenido a {{app}}" },
-      { "type": "text", "text": "Hola {{nombre}}, tu cuenta quedó activa." },
-      { "type": "list", "items": [
-        "{{beneficio_1}}",
-        "{{beneficio_2}}",
-        "{{beneficio_3}}"
-      ] },
-      { "type": "button", "text": "Abrir {{app}}", "url": "{{url}}" },
-      { "type": "note", "text": "Te escribimos porque usás {{app}} dentro de Coco Wallet." }
     ]
   },
   "summary": {
